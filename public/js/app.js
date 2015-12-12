@@ -1,3 +1,2 @@
 'use strict';
-
-var app = angular.module("todoApp", []);
+var app = angular.module("groceriesApp", []);
