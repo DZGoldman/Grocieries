@@ -1,15 +1,28 @@
 app.controller('GroceriesCtrl', GroceriesCtrl);
 
-function GroceriesCtrl() {
+ var allGroceries=[];
 
-  this.all = [];
+
+function GroceriesCtrl($scope, $http) {
+  //initialize with current database
+
+  this.start = function () {
+    $http.get('/index').then(function (data) {
+      data.data.forEach(function (grocery) {
+          allGroceries.push(grocery.foodItem)
+        })
+    })
+    return allGroceries
+  }
+
+  this.all = allGroceries;
 
   this.newGrocery = '';
 
   this.add = function () {
 
     this.all.push(this.newGrocery);
-    //TODO create new Grocery
+
     var objectData = {data1: this.newGrocery}
 
     $.ajax(
@@ -21,8 +34,23 @@ function GroceriesCtrl() {
      }
     );
     this.newGrocery = ''
+  };
+
+  this.delete = function ($index) {
+    var objectData = {data1: this.all[$index]};
+
+    $.ajax(
+       {
+       dataType: 'json',
+       data: objectData,
+       type: 'delete',
+       url: '/destroy'
+     }
+    );
+    this.all.splice($index, 1);
+  };
+  this.edit = function () {
+    console.log('editing');
   }
 
 };
-
-//on page load, add all of them

@@ -40,7 +40,20 @@ app.post('/new', function (req, res) {
       throw err
     }
   })
+})
 
-  // console.log(req.body.data1);
-  // res.send(req.body.data1)
+app.get('/index', function (req, res) {
+  Grocery.find({}, function (err, groceries) {
+    res.send(groceries)
+  })
+});
+
+app.delete('/destroy', function (req, res) {
+  Grocery.remove({foodItem: req.body.data1}, function (error, grocery) {
+    if (error) {
+      throw err
+    }else {
+      console.log('deleted!');
+    }
+  })
 })

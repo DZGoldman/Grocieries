@@ -3,9 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body ng-controller='GroceriesCtrl as foods'>
+  <div ng-init="foods.start()"></div>
 <h2>Your Grocery List App</h2>
+
+<img src="http://weknowyourdreams.com/images/food/food-02.jpg" alt="">
 <h4>You've got {{foods.all.length}} groceries to buy</h4>
 
 <form id= "add-grocery" ng-submit="foods.add()">
@@ -13,11 +17,12 @@
 
 </form>
 
-<p ng-if="foods.newGrocery">Workin on: {{foods.newGrocery}}</p>
+<p ng-if="foods.newGrocery">I need me some... {{foods.newGrocery}}</p>
 
 <ul id= "groceries">
-  <li ng-repeat="grocery in foods.all">
+  <li ng-repeat="grocery in foods.all track by $index" ng-click="foods.edit()">
     {{grocery}}
+    <button class="btn btn-delete" ng-click="foods.delete($index)">x</button>
 
   </li>
 

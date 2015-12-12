@@ -11,3 +11,25 @@
 ng\:form {
   display: block;
 }
+
+body{
+  background-color: teal;
+  margin: 20px
+}
+
+li{
+  margin-top: 10px
+}
+
+button{
+  background-color: black;
+  color: white
+}
+
+img{
+  width: 230px;
+  height: 200px;
+  float: right;
+  margin-right: 40px;
+  border-radius: 30px
+}
