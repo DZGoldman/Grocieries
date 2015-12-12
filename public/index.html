@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="todoApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Angular Todo</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body ng-controller="TodosCtrl as todos">
+
+  <header>
+    <h1>Angular Todo App</h1>
+    <h3>You have {{todos.all.length}} todos to do!</h3>
+  </header>
+
+  <form id="add-todo" ng-submit="todos.add()">
+    <input type="text" placeholder="I need to..." ng-model="todos.newTodo.task">
+  </form>
+
+  <p ng-if="todos.newTodo.task">About to add Todo: <strong>{{todos.newTodo.task}}</strong></p>
+
+  <ul id="todos">
+    <li ng-repeat="todo in todos.all" ng-hide="todo.done" class="ng-hide">
+      {{todo.task}}
+    </li>
+  </ul>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/todos_controller.js"></script>
+</body>
+</html>
