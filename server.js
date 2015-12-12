@@ -2,7 +2,8 @@ var express = require('express'),
     app = express(),
     morgan = require('morgan'),
     mongoose = require('mongoose'),
-    bodyParser = require('body-parser');
+    bodyParser = require('body-parser'),
+    Grocery = require('./models/grocery.js')
 
 
     // let's get some good logging in the console
@@ -29,3 +30,17 @@ app.listen(3000, function(){
 app.get('/', function(req,res){
   res.sendFile(__dirname+'/public/index.html')
 });
+
+app.post('/new', function (req, res) {
+  var newGrocery = new Grocery({
+    foodItem: req.body.data1
+  })
+  newGrocery.save(function (err) {
+    if (err) {
+      throw err
+    }
+  })
+
+  // console.log(req.body.data1);
+  // res.send(req.body.data1)
+})
